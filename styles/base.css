@@ -64,6 +64,8 @@ main section {
     border: 2px solid black;
     font-size: 1.3rem;
     border-radius: 10px;
+    padding-left: 5px;
+    text-align: left;
 }
 section p {
     font-family: "contrail one";
