@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Contrail+One&family=Roboto:ital,wght@1,900&display=swap');
+header h1 {
+    text-align: center;
+    font-family: "bungee";
+    font-size: 3.2rem;
+}
+header {
+    margin-top: 100px;
+}
+h2 {
+    font-family: "contrail one";
+    font-size: 2.5rem;
+}
+main section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+p {
+    font-family: "contrail one";
+    font-size: 2rem;
+}
+
+#weatherWidget {
+    display: none;
+    background-color: white;
+    padding: 0px 40px;
+    border: 3px solid black;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+#weatherWidget #temp {
+    font-size: 3rem;
+    margin: 30px 0 0;
+}
+#weatherWidget #location {
+    font-size: 2.2rem;
+    border-top: 2px solid black;
+    margin:20px 0 30px;
+    padding-top: 20px;
+}
+#sortBy{
+    height: 40px;
+    width: 180px;
+    border: 2px solid black;
+    font-size: 1.3rem;
+    border-radius: 10px;
+
+}
+
+body{
+    background-image: url(../images/background-img.png);
+    background-size: cover;
+    min-width: 100px;
+
+}
+img {
+    width: auto;
+    height: 200px;
+}
+
+

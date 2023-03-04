@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/base.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <header>
+        <h1>Weather App</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Cities in California</h2>
+            <p>
+                Select city: 
+                <select id="sortBy">
+                    <option disabled selected value="empty">-Select One-</option>
+                    <option value="upland">Upland</option>
+                    <option value="montclair">Montclair</option>
+                    <option value="ranchoCucamonga">Rancho Cucamonga</option>
+                    <option value="claremont">Claremont</option>
+                    <option value="losAngeles">Los Angeles</option>
+                    <option value="chino">Chino</option>
+                    <option value="sanFrancisco">San Francisco</option>
+                    <option value="sanDiego">San Diego</option>
+                </select>
+            </p>
+            <div id="weatherWidget">
+                <img id="weatherImg" src="" alt="">
+                <p id="temp"></p>
+                <p id="location"></p>
+                <p id="description"></p>
+                <p id="windSpeed"></p>
+                <p id="windChill"></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+<script src="scripts/app.js"></script>
+</html>
