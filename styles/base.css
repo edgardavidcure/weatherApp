@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Contrail+One&family=Roboto:ital,wght@1,900&display=swap');
+
+body{
+    background-image: url(../images/background-img.png);
+    background-size: cover;
+    min-width: 100px;
+}
 header h1 {
     text-align: center;
     font-family: "bungee";
@@ -17,10 +23,6 @@ main section {
     justify-content: center;
     align-items: center;
 }
-p {
-    font-family: "contrail one";
-    font-size: 2rem;
-}
 
 #weatherWidget {
     display: none;
@@ -33,33 +35,45 @@ p {
 }
 
 #weatherWidget #temp {
-    font-size: 3rem;
-    margin: 30px 0 0;
+    font-family: "contrail one";
+    font-size: 2.5rem;
+    margin: 10px 0;
 }
 #weatherWidget #location {
-    font-size: 2.2rem;
-    border-top: 2px solid black;
-    margin:20px 0 30px;
-    padding-top: 20px;
+    font-family: "bungee";
+    margin: 20px 0 10px;
+    font-size: 2rem;
 }
+
+#weatherWidget #description{
+    border-top: 2px solid black;
+    margin: 0;
+    padding: 20px 0;
+    font-family: "bungee";
+    font-size: 1.6rem;
+}
+
+#windSpeed, #windChill{
+    font-family: "contrail one";
+    font-size: 1.2rem;
+}
+
 #sortBy{
     height: 40px;
     width: 180px;
     border: 2px solid black;
     font-size: 1.3rem;
     border-radius: 10px;
-
 }
+section p {
+    font-family: "contrail one";
+    font-size: 1.5rem;
 
-body{
-    background-image: url(../images/background-img.png);
-    background-size: cover;
-    min-width: 100px;
 
 }
 img {
     width: auto;
-    height: 200px;
+    height: 100px;
 }
 
 
