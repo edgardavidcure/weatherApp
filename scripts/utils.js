@@ -6,7 +6,7 @@ function kelvinToFahrenheit(temperature) {
   return Math.round((kelvinToCelsius(temperature) * 1.8) + 32);
 }
 
-function capilize(text) {
+function capitalize(text) {
   const words = text.split(" ");
   for (let i = 0; i < words.length; i++) {
     words[i] = words[i][0].toUpperCase() + words[i].substr(1);

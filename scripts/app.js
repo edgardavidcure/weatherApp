@@ -58,7 +58,7 @@ function drawWeather(d) {
   const fahrenheit = kelvinToFahrenheit(d.main.temp);
 
   const rawDescription = d.weather[0].description;
-  const capitalizedDescription = capilize(rawDescription);
+  const capitalizedDescription = capitalize(rawDescription);
 
   let iconUrl = weatherImagesUrls[capitalizedDescription];
   if (!iconUrl || iconUrl === undefined) {
