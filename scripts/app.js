@@ -1,111 +1,84 @@
 const citySelectorElement = document.getElementById("city-selector");
+const weatherWidgetElement = document.getElementById("weatherWidget");
+const imageElement = document.getElementById("weatherImg");
+const descriptionElement = document.getElementById("description");
+const temperatureElement = document.getElementById('temp');
+const locationElement = document.getElementById('location');
+const windSpeedElement = document.getElementById('windSpeed');
+const windChillElement = document.getElementById("windChill");
 
-
-function weatherBalloon(cityID) {
-  var key = "582b55efa5e27910234adbbf3225cdad";
-  fetch("https://api.openweathermap.org/data/2.5/weather?id=" + cityID + "&appid=" + "582b55efa5e27910234adbbf3225cdad").then(function (resp) {
-    return resp.json()
-  }).then(function (data) {
-    drawWeather(data);
-  }).catch(function () {
-    // catch any errors
-  });
+const openWeatherConfig = {
+  apiKey: "582b55efa5e27910234adbbf3225cdad",
+  baseUrl: "https://api.openweathermap.org/data/2.5/weather",
 }
 
+const citiesId = {
+  montclair: 5374232,
+  upland: 5404915,
+  ranchoCucamonga: 5385955,
+  claremont: 5337696,
+  losAngeles: 5368361,
+  chino: 5336545,
+  sanFrancisco: 5391959,
+  sanDiego: 5391811,
+}
 
-citySelectorElement.addEventListener("change", (event) => {
-  document.getElementById("weatherWidget").style.display = "block"
-  if (event.target.value == "montclair") {
-    weatherBalloon(5374232);
-    console.log("hey")
-  }
-  if (event.target.value == "upland") {
-    weatherBalloon(5404915);
-  }
-  if (event.target.value == "ranchoCucamonga") {
-    weatherBalloon(5385955);
-  }
-  if (event.target.value == "claremont") {
-    weatherBalloon(5337696);
-  }
-  if (event.target.value == "losAngeles") {
-    weatherBalloon(5368361);
-  }
-  if (event.target.value == "chino") {
-    weatherBalloon(5336545);
-  }
-  if (event.target.value == "sanFrancisco") {
-    weatherBalloon(5391959);
-  }
-  if (event.target.value == "sanDiego") {
-    weatherBalloon(5391811);
-  }
-})
+const weatherImagesUrls = {
+  "Clear Sky": "images/clearsky-icon.png",
+  "Few Clouds": "images/fewclouds-icon.png",
+  "Scattered Clouds": "images/scatteredclouds-icon.png",
+  "Broken Clouds": "images/brokenclouds-icon.png",
+  "Shower Rain": "images/showerrain-icon.png",
+  "Rain": "images/rain-icon.png",
+  "Thunderstorm": "images/thunderstorm-icon.png",
+  "Snow": "images/snow-icon.png",
+  "Mist": "images/mist-icon.png",
+}
 
+citySelectorElement.addEventListener("change", async (event) => {
+  weatherWidgetElement.style.display = "block";
+  const key = event.target.value;
+  const cityId = citiesId[key];
+  const weatherData = await getWeatherData(cityId);
+  drawWeather(weatherData);
+});
 
-
-
-
+async function getWeatherData(cityID) {
+  try {
+    const url = `${openWeatherConfig.baseUrl}?id=${cityID}&appid=${openWeatherConfig.apiKey}`;
+    const response = await fetch(url)
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    throw error;
+  }
+}
 
 function drawWeather(d) {
-  var celcius = Math.round(parseFloat(d.main.temp) - 273.15);
-  var fahrenheit = Math.round(((parseFloat(d.main.temp) - 273.15) * 1.8) + 32);
-  const description = d.weather[0].description.split(" ")
-  for (let i = 0; i < description.length; i++) {
-    description[i] = description[i][0].toUpperCase() + description[i].substr(1);
-  }
-  const image = document.getElementById("weatherImg");
+  const fahrenheit = kelvinToFahrenheit(d.main.temp);
 
-  const capitalizedDescription = description.join(" ")
-  document.getElementById("description").innerText = capitalizedDescription
-  switch (capitalizedDescription) {
-    case "Clear Sky":
-      iconsrc = "images/clearsky-icon.png";
-      break;
-    case "Few Clouds":
-      iconsrc = "images/fewclouds-icon.png";
-      break;
-    case "Scattered Clouds":
-      iconsrc = "images/scatteredclouds-icon.png"
-      break;
-    case "Broken Clouds":
-      iconsrc = "images/brokenclouds-icon.png";
-      break;
-    case "Shower Rain":
-      iconsrc = "images/showerrain-icon.png";
-      break;
-    case "Rain":
-      iconsrc = "images/rain-icon.png";
-      break;
-    case "Thunderstorm":
-      iconsrc = "images/thunderstorm-icon.png";
-      break;
-    case "Snow":
-      iconsrc = "images/snow-icon.png";
-      break;
-    case "Mist":
-      iconsrc = "images/mist-icon.png";
-      break;
-    default:
-      iconsrc = `https://openweathermap.org/img/w/${d.weather[0].icon}.png`;
+  const rawDescription = d.weather[0].description;
+  const capitalizedDescription = capilize(rawDescription);
+
+  let iconUrl = weatherImagesUrls[capitalizedDescription];
+  if (!iconUrl || iconUrl === undefined) {
+    iconUrl = `https://openweathermap.org/img/w/${d.weather[0].icon}.png`;
   }
 
-  image.setAttribute("src", iconsrc)
-  image.setAttribute("alt", capitalizedDescription)
-  //document.getElementById('description').innerHTML = d.weather[0].description;
-  document.getElementById('temp').innerHTML = fahrenheit + '&deg; F';
-  document.getElementById('location').innerHTML = d.name;
   const windSpeed = d.wind.speed;
-  const mph = parseFloat(windSpeed * 2.236936).toFixed(1);
-  document.getElementById('windSpeed').innerHTML = `Wind Speed: ${mph} mph`
-  if (fahrenheit <= 50 && mph > 3.0) {
-    const windChillVar = parseFloat(35.74 + (0.6215 * fahrenheit) - (35.75 * (mph ** 0.16)) + (0.4275 * fahrenheit * (mph ** 0.16))).toFixed(1);
-    document.getElementById("windChill").innerHTML = `Wind Chill: ${windChillVar}&deg;`
-  }
-  else {
-    const windChillVar = "N/A";
-    document.getElementById("windChill").innerHTML = `Wind Chill: ${windChillVar}`
+  const mph = mpsToMph(windSpeed);
+  const windChill = getWindChill(fahrenheit, mph);
 
-  }
+  descriptionElement.innerText = capitalizedDescription;
+  imageElement.setAttribute("src", iconUrl);
+  imageElement.setAttribute("alt", capitalizedDescription);
+  temperatureElement.innerHTML = fahrenheit + '&deg; F';
+  locationElement.innerHTML = d.name;
+  windSpeedElement.innerHTML = `Wind Speed: ${mph} mph`;
 
+  if (windChill === 0) {
+    windChillElement.innerHTML = `Wind Chill: N/A`;
+  } else {
+    windChillElement.innerHTML = `Wind Chill: ${windChill}&deg;`;
+  }
 }
