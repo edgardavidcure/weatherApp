@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/base.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.ico"
+    />
+    <link rel="stylesheet" href="styles/base.css" />
+    <script src="scripts/app.js" defer></script>
     <title>Weather App</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Weather App</h1>
+      <h1>Weather App</h1>
     </header>
     <main>
-        <section>
-            <h2>Cities in California</h2>
-            <p>
-                Select city: 
-                <select id="sortBy">
-                    <option disabled selected value="empty">-Select One-</option>
-                    <option value="upland">Upland</option>
-                    <option value="montclair">Montclair</option>
-                    <option value="ranchoCucamonga">Rancho Cucamonga</option>
-                    <option value="claremont">Claremont</option>
-                    <option value="losAngeles">Los Angeles</option>
-                    <option value="chino">Chino</option>
-                    <option value="sanFrancisco">San Francisco</option>
-                    <option value="sanDiego">San Diego</option>
-                </select>
-            </p>
-            <div id="weatherWidget">
-                <p id="location"></p>
+      <section>
+        <h2>Cities in California</h2>
+        <p>Select city:</p>
+        <select id="sortBy">
+          <option disabled selected value="empty">-Select One-</option>
+          <option value="upland">Upland</option>
+          <option value="montclair">Montclair</option>
+          <option value="ranchoCucamonga">Rancho Cucamonga</option>
+          <option value="claremont">Claremont</option>
+          <option value="losAngeles">Los Angeles</option>
+          <option value="chino">Chino</option>
+          <option value="sanFrancisco">San Francisco</option>
+          <option value="sanDiego">San Diego</option>
+        </select>
+        <div id="weatherWidget">
+          <p id="location"></p>
 
-                <img id="weatherImg" src="" alt="">
+          <img id="weatherImg" src="" alt="" />
 
-                <p id="temp"></p>
-                <p id="description"></p>
-                <p id="windSpeed"></p>
-                <p id="windChill"></p>
-            </div>
-        </section>
+          <p id="temp"></p>
+          <p id="description"></p>
+          <p id="windSpeed"></p>
+          <p id="windChill"></p>
+        </div>
+      </section>
     </main>
-    <footer>
-
-    </footer>
-</body>
-<script src="scripts/app.js"></script>
+    <footer></footer>
+  </body>
 </html>
